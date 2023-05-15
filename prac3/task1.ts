@@ -1,6 +1,6 @@
 function add(num: number): Function {
     let sum = num;
-    const innerAdd = nextNum => {
+    const innerAdd = (nextNum: number | undefined) => {
         if (nextNum !== undefined) {
             sum += nextNum;
             return innerAdd;
