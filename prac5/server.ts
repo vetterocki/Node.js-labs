@@ -1,8 +1,10 @@
-import express, { NextFunction, Request, Response } from "express";
-import morgan from "morgan";
-import { HttpError } from "http-errors";
-import { config } from "./config/config";
+import * as express from "express";
+import {Request, Response} from "express";
+
+import {HttpError} from "http-errors";
+import {config} from "./config/config";
 import {userController} from "./controller/user.controller";
+
 
 export class Server {
   private app = express();
@@ -16,8 +18,7 @@ export class Server {
   }
 
   private initMiddlewares() {
-    this.app.use(express.json({ limit: "5mb" }));
-    this.app.use(morgan("common"));
+    this.app.use(express.json({limit: "5mb"}));
   }
 
   private initRoutes() {
@@ -26,13 +27,13 @@ export class Server {
 
   private initErrorHandling() {
     this.app.use(
-      (err: HttpError, req: Request, res: Response, next: NextFunction) => {
-        const statusCode = err.status || 500;
-        res.status(statusCode).send({
-          message: err.message,
-          status: statusCode,
-        });
-      }
+        (err: HttpError, req: Request, res: Response) => {
+          const statusCode = err.status || 500;
+          res.status(statusCode).send({
+            message: err.message,
+            status: statusCode,
+          });
+        }
     );
   }
 

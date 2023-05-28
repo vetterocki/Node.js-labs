@@ -1,4 +1,4 @@
-import {UserEntity} from "../../../express/model/user.entity";
+import {UserEntity} from "../model/user.entity";
 import * as uuid from "uuid";
 
 const users: UserEntity[] = [

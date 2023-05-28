@@ -1,4 +1,4 @@
-import {UserEntity} from "../../../express/model/user.entity";
+import {UserEntity} from "../model/user.entity";
 import {UserDto} from "./user.dto";
 import {v4 as uuidv4} from 'uuid';
 

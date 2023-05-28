@@ -1,12 +1,11 @@
-import e, {Router} from "express";
+import {Router} from "express";
 import {Request, Response} from 'express';
-import {userService} from "../../../express/service/user.service";
+import {userService} from "../service/user.service";
 
 const router = Router();
 
 
 router.get("/:userId", (req: Request, res: Response) => {
-    console.log("CHILL")
     try {
         const user = userService.getUserById(+req.params.userId);
         if (user)

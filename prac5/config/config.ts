@@ -1,4 +1,5 @@
-import convict from "convict";
+import convict = require("convict");
+
 
 export const config = convict({
     port: {
@@ -7,6 +8,4 @@ export const config = convict({
         default: 3000,
         env: "PORT",
     },
-})
-    .validate({allowed: "strict"})
-    .getProperties();
+}).getProperties();
