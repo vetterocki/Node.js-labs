@@ -8,7 +8,7 @@ class UserService {
         return UserDtoMapper.entityToDto(userEntity);
     }
 
-    getUserById(userId: number): UserDto | undefined {
+    getUserById(userId: string): UserDto | undefined {
         const userEntity = userDao.getById(userId);
         return userEntity ? UserDtoMapper.entityToDto(userEntity) : undefined;
     }
@@ -17,12 +17,12 @@ class UserService {
         return userDao.getAll().map(user => UserDtoMapper.entityToDto(user));
     }
 
-    updateUser(userId: number, username: string, name?: string): UserDto {
+    updateUser(userId: string, username: string, name?: string): UserDto {
         const userEntity = userDao.update(userId, username, name);
         return UserDtoMapper.entityToDto(userEntity);
     }
 
-    deleteUser(userId: number): void {
+    deleteUser(userId: string): void {
         userDao.delete(userId);
     }
 }

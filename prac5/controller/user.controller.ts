@@ -7,10 +7,8 @@ const router = Router();
 
 router.get("/:userId", (req: Request, res: Response) => {
     try {
-        const user = userService.getUserById(+req.params.userId);
-        if (user)
-            res.status(200).json(user)
-        res.status(404).json({message: 'Bad request'});
+        const user = userService.getUserById(req.params.userId);
+        user ? res.status(200).json(user) : res.status(404).json({message: 'Bad request'});
     } catch (err) {
         console.log(err)
         res.status(505).json({message: 'Internal Server Error'});
@@ -39,10 +37,8 @@ router.post("/", (req: Request, res: Response) => {
 router.put("/:userId", (req: Request, res: Response) => {
     try {
         const {username, name} = req.body;
-        const user = userService.updateUser(+req.params.userId, username, name);
-        if (user)
-            res.status(200).json(user)
-        res.status(404).json({message: 'Bad request'});
+        const user = userService.updateUser(req.params.userId, username, name);
+        user ? res.status(200).json(user) : res.status(404).json({message: 'Bad request'});
     } catch (err) {
         res.status(505).json({message: 'Internal Server Error'});
     }
@@ -50,10 +46,10 @@ router.put("/:userId", (req: Request, res: Response) => {
 
 router.delete("/:userId", (req: Request, res: Response) => {
     try {
-        const id = +req.params.userId;
+        const id = req.params.userId;
         const user = userService.getUserById(id);
         if (user) {
-            userService.deleteUser(+req.params.userId);
+            userService.deleteUser(id);
             res.status(200).json({
                 message: "User with id " + id + " was successfully deleted."
             });

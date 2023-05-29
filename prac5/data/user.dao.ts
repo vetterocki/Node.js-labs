@@ -26,29 +26,23 @@ class UserDao {
         return user;
     }
 
-    getById(userId: number): UserEntity {
-        return users.filter(user => user.id === userId.toString())[0];
+    getById(userId: string): UserEntity {
+        return users.find(user => user.id === userId);
     }
 
     getAll(): UserEntity[] {
         return users;
     }
 
-    update(userId: number, username: string, name: string = ''): UserEntity {
-        const id = userId.toString();
-        for (let i = 0; i < users.length; i++) {
-            if (users[i].id === id) {
-                const user = {id: id, username, name: name};
-                users.splice(i, 1, user)
-                return user;
-            }
-        }
-        const newUser: UserEntity = {id: id, username: username, name: name};
-        users.push(newUser);
-        return newUser;
+    update(userId: string, username: string, name: string = ''): UserEntity {
+        const index = users.findIndex(user => user.id === userId);
+        const user: UserEntity = {id: userId, username, name};
+        index !== -1 ? users[index] = user : users.push(user);
+        return user;
     }
 
-    delete(userId: number): void {
+
+    delete(userId: string): void {
         const user: UserEntity = this.getById(userId);
         users.splice(users.indexOf(user), 1);
     }
